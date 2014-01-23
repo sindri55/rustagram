@@ -1,0 +1,65 @@
+@********************************
+This is the sign up page for rustagram
+*********************************@
+
+@****************************
+*addImageForm Connects the html to the Image class and gets the form fields from there
+*****************************@
+@(addImageForm: Form[is.ru.honn.rustagram.domain.Image])
+
+
+    @import helper._
+    @import helper.twitterBootstrap._
+    @title = {
+        Add Image
+    }
+
+@*********************
+*This is the body of the html and contains a form for the user to enter his image information
+* @param url is where the user enters the link to the image
+* @param description is where the user enters his description of the image
+*********************@
+    @main("addimage") {
+        @helper.form(action = routes.Application.processImageForm) {
+            <!--  <----------**************************----------------->
+            <fieldset>
+                <legend>Add My Picture</legend>
+
+                @inputText(
+                    addImageForm("url"),
+                    '_label -> "Add Image",
+                    '_help -> "Please choose you image",
+                    '_error -> addImageForm.globalError
+                )
+
+                @inputText(
+                    addImageForm("description"),
+                    '_label -> "Add Description",
+                    '_help -> "Please enter your Description",
+                    '_error -> addImageForm.globalError
+                )
+
+                <!-- Við vitum og sjáum að það er ekki hægt að henda inn commenti í imageForm, en við stöndum strand-->
+                @inputText(
+                    addImageForm("comment"),
+                    '_label -> "Add Comment",
+                    '_help -> "Please enter your Comment",
+                    '_error -> addImageForm.globalError
+                )
+
+
+            </fieldset>
+
+            @*********************
+            *This is the submit button which sends the image information to
+            * the processImageform in the Application controller. If the user presses cancel
+            * he is redirected to the index page.
+            **********************@
+
+
+            <div class="actions">
+                <input type="submit" class="btn primary" value="Add Image">
+                <a href="@routes.Application.index" class="btn">Cancel</a>
+            </div>
+        }
+    }

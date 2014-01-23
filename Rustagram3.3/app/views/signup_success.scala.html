@@ -1,0 +1,23 @@
+@*****************************
+* This page is displayed when the user signup is successful
+******************************@
+
+@******************************
+* @param user connects this page to the User class for user information
+*******************************@
+@(user: is.ru.honn.rustagram.domain.User)
+@*********************
+* The body displays information about the signup for the user
+* @Param Name is the username registered
+* @param displayname is the displayname of the user
+* @param email is the email of the user
+********************@
+
+    @main(("Account created!"), nav = "signup") {
+        <h2>Your account:</h2>
+        <p>Name: @user.getUsername</p>
+        <p>DisplayName: @user.getDisplayName()</p>
+        <p>Email: @user.getEmail()</p>
+        <p>And we can inform you that you are a @user.getDisplayName</p>
+
+    }

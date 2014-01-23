@@ -1,0 +1,24 @@
+@*****************************
+* This page is displayed when the adding a image is successful
+******************************@
+
+@******************************
+* @param image connects this page to the image class for image information
+*******************************@
+@(image: is.ru.honn.rustagram.domain.Image)
+
+@*********************
+* The body displays information about the image
+* @Param Url is the link of the image added
+* @param description is the description of the image
+* @param display name is the display name of the user that added the image
+********************@
+
+    @main(("image added!"), nav = "addimage") {
+        <h2>Your Image:</h2>
+        <p>Url: @image.getUrl</p>
+        <p>Description: @image.getDescription</p>
+        <p>Display Name: @image.getCreator</p>
+
+
+    }

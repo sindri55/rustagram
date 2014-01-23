@@ -1,0 +1,72 @@
+@********************************
+This is the index page for rustagram
+*********************************@
+
+@****************************
+*feeds Connects the html to the Feed class
+*****************************@
+@(feeds: List[is.ru.honn.rustagram.domain.Feed])
+@import collection.JavaConversions._
+
+
+@main(title = "Welcome") {
+
+    <h2>Welcome to Rustagram</h2>
+     @*************************
+    *If the session has a username the user sees his profile page
+    ***************************@
+    @if(session.get("username")) {
+        @**************
+        Greets the user with his displayname
+        ***********************@
+        <h3>Good to see you again @{
+            session.get("displayName")
+        }!</h3>
+        @*********************
+        Body show all the newes images add by all users
+        **********************@
+        <html>
+            <fieldset>
+            <ul>
+            @*********************
+             Loops through the feeds object and gets all the information
+            ***********************@
+            @for(feed <- feeds) {
+                @**********
+                Displayes the images from the url given in each feed object
+                ***********@
+                <img src =@feed.getUrl() />
+                @**********
+                Displayes the displayname from the name given in each feed object
+                ***********@
+                @feed.getCreatorDisplayName()
+                @**********
+                Displayes the creation date from the date given in each feed object
+                ***********@
+                @feed.getCreated()
+                @**********
+                Displayes the comments from the comments given in each feed object
+                ***********@
+                @for(s <- feed.getComments()) {
+                    s.comments
+                }
+                <br>
+                <br>
+
+            }
+            </ul>
+            </fieldset>
+        </html>
+
+    @***************
+        if the user is not logged inn the view renders the signup and login buttons
+    **************@
+    } else {
+
+        <h3>Looks like you're new here! Welcome!</h3>
+        <p>
+            <a class="btn" href="@routes.Users.showSignupForm()">Sign up</a>
+            <a class="btn" href="@routes.Users.showLoginForm()">Login</a>
+        </p>
+    }
+}

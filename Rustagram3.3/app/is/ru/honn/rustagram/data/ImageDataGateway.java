@@ -1,0 +1,21 @@
+/*
+*@(#)Hello java 1.7 21 Nov 2013 Davíð Snæhólm Baldursson og Sindri Þór Stefánsson
+*
+*Copyright(c)Davíð Snæhólm Baldursson og Sindri Þór Stefánsson
+*/
+package is.ru.honn.rustagram.data;
+
+import is.ru.honn.rustagram.domain.Image;
+import is.ruframework.data.RuDataAccess;
+
+import java.util.List;
+
+public interface ImageDataGateway extends RuDataAccess {
+    public int addImage(Image image);
+
+    public Image getImageById(int id);
+
+    public List<Image> getImagesByUsername(String username);
+
+    public List<Image> getAllImages();
+}

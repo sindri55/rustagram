@@ -1,0 +1,80 @@
+@********************************
+This is the sign up page for rustagram
+*********************************@
+
+@****************************
+*Connects the html to the user registration class and gets the form field from there
+*****************************@
+@(signupForm: Form[is.ru.honn.rustagram.domain.UserRegistration])
+
+    @import helper._
+    @import helper.twitterBootstrap._
+    @title = {
+        Sign Up
+    }
+@*********************
+*This is the body of the html the user sees when signing up.
+* @param inputText is where the user enters his username
+* @param inputPassword is where the user enter his desired password
+* @param repeatPassword is where the user verifies that his password is correct
+* @param displayName is where the user enters his desired display name for other users to see
+* @param email is where user enters his email
+*********************@
+    @main("signup") {
+        @helper.form(action = routes.Users.processSignupForm) {
+            <!--  <----------**************************----------------->
+            <fieldset>
+                <legend>Account informations</legend>
+                @inputText(
+                    signupForm("username"),
+                    '_label -> "Username",
+                    '_help -> "Please enter your username.",
+                    '_error -> signupForm.globalError
+                )
+                @inputPassword(
+                    signupForm("password"),
+                    '_label -> "Password",
+                    '_help -> "A password must be at least 6 characters. "
+                )
+                @inputPassword(
+                    signupForm("repeatPassword"),
+                    '_label -> "Repeat password",
+                    '_help -> "Please repeat your password again.",
+                    '_error -> signupForm.globalError
+                )
+                @inputText(
+                    signupForm("displayName"),
+                    '_label -> "DisplayName",
+                    '_help -> "Please choose a valid DisplayName.",
+                    '_error -> signupForm.globalError
+                )
+                @inputText(
+                    signupForm("email"), '_label -> "Email",
+                    '_help -> "Enter a valid email address."
+                )
+
+
+            </fieldset>
+            <fieldset>
+
+                @***************
+                * @param signupForm is where the user accepts the terms of service
+                *************@
+            @checkbox(
+                signupForm("accept"),
+                '_label -> None, '_text -> "You agree the Terms and conditions",
+                '_showConstraints -> false
+            )
+
+                @*********************
+                *This is the submit button which sends the user information to
+                * the processSignupForm in the Users controller and then redirects the user to the signup_success page.
+                * If the user presses cancel he is redirected to the index page.
+                **********************@
+            </fieldset>
+            <div class="actions">
+                <input type="submit" class="btn primary" value="Sign Up">
+                <a href="@routes.Application.index" class="btn">Cancel</a>
+            </div>
+        }
+    }
